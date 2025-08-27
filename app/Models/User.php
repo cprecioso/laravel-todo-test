@@ -60,11 +60,8 @@ class User extends Authenticatable
             ->implode('');
     }
 
-    /**
-     * Get tasks for the user
-     */
-    public function tasks(): HasMany
+    public function projects(): HasMany
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Project::class, 'owner_id');
     }
 }

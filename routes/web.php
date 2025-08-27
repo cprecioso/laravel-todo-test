@@ -9,13 +9,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::view('dashboard', 'dashboard')
+Route::get('projects', \App\Livewire\Projects\Index::class)
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('projects');
 
-Route::get('tasks', \App\Livewire\Tasks\Index::class)
+Route::get('projects/{project}', \App\Livewire\Tasks\Index::class)
     ->middleware(['auth', 'verified'])
-    ->name('tasks');
+    ->name('project');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

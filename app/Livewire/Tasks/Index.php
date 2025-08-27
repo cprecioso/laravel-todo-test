@@ -2,23 +2,25 @@
 
 namespace App\Livewire\Tasks;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\Project;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Index extends Component
 {
 
+    public Project $project;
     public $tasks;
 
     #[On('task-list-update')]
     public function refreshTasks()
     {
-        $this->tasks = Auth::user()->tasks()->get();
+        $this->tasks = $this->project->tasks()->get();
     }
 
-    public function mount()
+    public function mount(Project $project)
     {
+        $this->project = $project;
         $this->refreshTasks();
     }
 
