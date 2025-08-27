@@ -12,8 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Task extends Model
 {
-    use HasUlids;
-
     protected $fillable = ["text", "is_completed", "user_id"];
 
     protected $attributes = [
