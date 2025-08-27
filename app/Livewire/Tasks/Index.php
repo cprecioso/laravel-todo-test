@@ -2,16 +2,24 @@
 
 namespace App\Livewire\Tasks;
 
-use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Index extends Component
 {
-    public $tasks = [];
+
+    public $tasks;
+
+    #[On('task-list-update')]
+    public function refreshTasks()
+    {
+        $this->tasks = Auth::user()->tasks()->get();
+    }
 
     public function mount()
     {
-        $this->tasks = Task::where('user_id', auth()->id())->get();
+        $this->refreshTasks();
     }
 
     public function render()

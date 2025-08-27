@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class Item extends Component
 {
-
     public Task $task;
 
     public function render()
@@ -25,5 +24,11 @@ class Item extends Component
     {
         $this->task->is_completed = false;
         $this->task->save();
+    }
+
+    public function handleDelete()
+    {
+        $this->task->delete();
+        $this->dispatch('task-list-update');
     }
 }

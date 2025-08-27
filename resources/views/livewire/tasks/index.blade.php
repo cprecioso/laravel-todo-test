@@ -5,11 +5,13 @@
         <flux:separator variant="subtle" />
     </div>
 
-    <ul>
+    <div class="mb-4">
+        <livewire:tasks.new-input />
+    </div>
+
+    <ul wire:task-list-update="$refresh">
         @forelse ($tasks as $task)
-            <li :key="$task->id">
-                <livewire:tasks.item :task="$task" />
-            </li>
+            <livewire:tasks.item :$task :key="$task->id" />
         @empty
             <li class="text-gray-500">{{ __('No tasks available') }}</li>
         @endforelse
