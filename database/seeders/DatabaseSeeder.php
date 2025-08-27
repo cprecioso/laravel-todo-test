@@ -34,6 +34,11 @@ class DatabaseSeeder extends Seeder
                 'owner_id' => $mainUser->id,
             ]);
 
+            if ($i % 2 == 0) {
+                // Share every second project with the other user
+                $project->guests()->attach($otherUser->id);
+            }
+
             for ($j = 0; $j < 10; $j++) {
                 Task::create([
                     'text' => 'Task ' . ($i * 10 + $j),

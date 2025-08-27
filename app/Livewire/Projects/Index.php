@@ -9,12 +9,14 @@ use Livewire\Component;
 class Index extends Component
 {
 
-    public $projects;
+    public $ownProjects;
+    public $guestProjects;
 
     #[On('project-list-update')]
     public function refreshProjects()
     {
-        $this->projects = Auth::user()->projects()->get();
+        $this->ownProjects = Auth::user()->ownProjects()->get();
+        $this->guestProjects = Auth::user()->guestProjects()->get();
     }
 
     public function mount()
