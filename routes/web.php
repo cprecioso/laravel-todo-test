@@ -9,11 +9,17 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('projects', \App\Livewire\Projects\Index::class)
+Route::get('dashboard', function () {
+    return view('dashboard');
+})
     ->middleware(['auth', 'verified'])
-    ->name('projects');
+    ->name('dashboard');
 
-Route::get('projects/{project}', \App\Livewire\Tasks\Index::class)
+Route::get('projects/new', \App\Livewire\Projects\NewInput::class)
+    ->middleware(['auth', 'verified'])
+    ->name('projects.new');
+
+Route::get('projects/{project}', \App\Livewire\Projects\Contents::class)
     ->middleware(['auth', 'verified'])
     ->name('project');
 

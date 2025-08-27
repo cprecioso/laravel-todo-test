@@ -16,7 +16,7 @@ class NewInput extends Component
             'name' => 'required|string|max:255',
         ]);
 
-        Project::create([
+        $newProject = Project::create([
             'name' => $this->name,
             'owner_id' => Auth::id(),
         ]);
@@ -24,6 +24,8 @@ class NewInput extends Component
         $this->reset('name');
         session()->flash('message', 'Project added successfully!');
         $this->dispatch('project-list-update');
+
+        $this->redirectRoute('project', ['project' => $newProject->id]);
     }
 
     public function render()

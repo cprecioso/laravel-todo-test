@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire\Tasks;
+namespace App\Livewire\Projects;
 
 use App\Models\Project;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class Index extends Component
+class Contents extends Component
 {
 
     public Project $project;
@@ -26,6 +26,14 @@ class Index extends Component
 
     public function render()
     {
-        return view("livewire.tasks.index");
+        return view("livewire.projects.contents");
+    }
+
+    public function deleteProject()
+    {
+        $this->project->delete();
+        session()->flash('message', 'Project deleted successfully!');
+        $this->dispatch('project-list-update');
+        $this->redirectRoute('dashboard');
     }
 }
