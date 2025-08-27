@@ -12,6 +12,8 @@ class NewInput extends Component
 
     public function addProject()
     {
+        $this->authorize('create', Project::class);
+
         $this->validate([
             'name' => 'required|string|max:255',
         ]);

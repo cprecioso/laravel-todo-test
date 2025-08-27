@@ -11,8 +11,11 @@
         @endforeach
     </flux:navlist.group>
 
-    <flux:navlist.item icon="plus" variant="outline" :href="route('projects.new')"
-        :current="request()->routeIs('projects.new')">
-        New project
-    </flux:navlist.item>
+
+    @can('create', \App\Models\Project::class)
+        <flux:navlist.item icon="plus" variant="outline" :href="route('projects.new')"
+            :current="request()->routeIs('projects.new')">
+            New project
+        </flux:navlist.item>
+    @endcan
 </div>

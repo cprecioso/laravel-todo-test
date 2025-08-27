@@ -16,18 +16,24 @@ class Item extends Component
 
     public function handleCheck()
     {
+        $this->authorize('update', $this->task);
+
         $this->task->is_completed = true;
         $this->task->save();
     }
 
     public function handleUncheck()
     {
+        $this->authorize('update', $this->task);
+
         $this->task->is_completed = false;
         $this->task->save();
     }
 
     public function handleDelete()
     {
+        $this->authorize('delete', $this->task);
+
         $this->task->delete();
         $this->dispatch('task-list-update');
     }

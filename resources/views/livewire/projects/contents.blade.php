@@ -6,16 +6,20 @@
             <flux:separator variant="subtle" />
         </div>
 
-        <button type="button" class="ml-4 px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-            wire:click="deleteProject"
-            wire:confirm="{{ __('Are you sure you want to delete this project? This action cannot be undone.') }}">
-            {{ __('Delete project') }}
-        </button>
+        @can('delete', $project)
+            <button type="button" class="ml-4 px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                wire:click="deleteProject"
+                wire:confirm="{{ __('Are you sure you want to delete this project? This action cannot be undone.') }}">
+                {{ __('Delete project') }}
+            </button>
+        @endcan
     </div>
 
-    <div class="mb-4">
-        <livewire:tasks.new-input :project="$project" />
-    </div>
+    @can('create', [\App\Models\Task::class, $project])
+        <div class="mb-4">
+            <livewire:tasks.new-input :project="$project" />
+        </div>
+    @endcan
 
     <ul wire:task-list-update="$refresh">
         @forelse ($tasks as $task)

@@ -14,6 +14,8 @@ class NewInput extends Component
 
     public function addTask()
     {
+        $this->authorize('create', [Task::class, $this->project]);
+
         $this->validate([
             'text' => 'required|string|max:255',
         ]);

@@ -15,6 +15,8 @@ class Contents extends Component
     #[On('task-list-update')]
     public function refreshTasks()
     {
+        $this->authorize('view', $this->project);
+
         $this->tasks = $this->project->tasks()->get();
     }
 
@@ -31,6 +33,8 @@ class Contents extends Component
 
     public function deleteProject()
     {
+        $this->authorize('delete', $this->project);
+
         $this->project->delete();
         session()->flash('message', 'Project deleted successfully!');
         $this->dispatch('project-list-update');
