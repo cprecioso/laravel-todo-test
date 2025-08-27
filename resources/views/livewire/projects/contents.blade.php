@@ -14,7 +14,7 @@
     </div>
 
     <div class="mb-4">
-        <livewire:tasks.new-input />
+        <livewire:tasks.new-input :project="$project" />
     </div>
 
     <ul wire:task-list-update="$refresh">

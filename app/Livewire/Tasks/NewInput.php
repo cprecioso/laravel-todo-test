@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Tasks;
 
+use App\Models\Project;
 use Livewire\Component;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 
 class NewInput extends Component
 {
+    public Project $project;
     public string $text = '';
 
     public function addTask()
@@ -19,6 +21,7 @@ class NewInput extends Component
         Task::create([
             'text' => $this->text,
             'user_id' => Auth::id(),
+            'project_id' => $this->project->id,
         ]);
 
         $this->reset('text');
