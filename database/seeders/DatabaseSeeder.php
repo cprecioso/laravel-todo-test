@@ -16,16 +16,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::create([
+        $mainUser = User::create([
             'name' => 'Carlos Precioso',
             'email' => 'me@example.com',
+            'password' => Hash::make('password'),
+        ]);
+
+        $otherUser = User::create([
+            'name' => 'Guest Guéstez',
+            'email' => 'guest@example.com',
             'password' => Hash::make('password'),
         ]);
 
         for ($i = 0; $i < 10; $i++) {
             $project = Project::create([
                 'name' => "Project $i",
-                'owner_id' => $user->id,
+                'owner_id' => $mainUser->id,
             ]);
 
             for ($j = 0; $j < 10; $j++) {
