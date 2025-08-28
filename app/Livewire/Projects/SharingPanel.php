@@ -8,6 +8,7 @@ use App\Models\ProjectInvite;
 use App\Models\User;
 use Flux\Flux;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -17,9 +18,11 @@ class SharingPanel extends Component
 
     public User $owner;
 
+    #[Locked]
     /** @var Collection<int, User> */
     public Collection $guests;
 
+    #[Locked]
     /** @var Collection<int, ProjectInvite> */
     public Collection $invites;
 

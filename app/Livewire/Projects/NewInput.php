@@ -4,19 +4,19 @@ namespace App\Livewire\Projects;
 
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class NewInput extends Component
 {
+    #[Validate('required|string|max:255')]
     public string $name = '';
 
     public function addProject()
     {
         $this->authorize('create', Project::class);
 
-        $this->validate([
-            'name' => 'required|string|max:255',
-        ]);
+        $this->validate();
 
         $newProject = Project::create([
             'name' => $this->name,

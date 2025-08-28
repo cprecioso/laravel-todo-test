@@ -5,14 +5,17 @@ namespace App\Livewire\Projects;
 use App\Models\Project;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Index extends Component
 {
+    #[Locked]
     /** @var Collection<int, Project> */
     public Collection $ownProjects;
 
+    #[Locked]
     /** @var Collection<int, Project> */
     public Collection $guestProjects;
 

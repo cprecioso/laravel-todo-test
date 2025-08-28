@@ -5,6 +5,7 @@ namespace App\Livewire\Projects;
 use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -12,6 +13,7 @@ class Contents extends Component
 {
     public Project $project;
 
+    #[Locked]
     /** @var Collection<int, Task> */
     public Collection $tasks;
 
