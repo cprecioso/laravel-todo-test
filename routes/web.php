@@ -23,6 +23,10 @@ Route::get('projects/{project}', \App\Livewire\Projects\Contents::class)
     ->middleware(['auth', 'verified'])
     ->name('project');
 
+Route::get('accept-invite/{projectInvite}', [\App\Http\Controllers\ProjectInviteController::class, 'accept'])
+    ->middleware(['auth', 'verified'])
+    ->name('project-invite.accept');
+
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 

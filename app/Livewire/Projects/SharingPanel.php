@@ -2,18 +2,21 @@
 
 namespace App\Livewire\Projects;
 
+use App\Http\Controllers\ProjectInviteController;
 use App\Models\Project;
+use App\Models\ProjectInvite;
 use App\Models\User;
 use Flux\Flux;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class SharingPanel extends Component
 {
     public Project $project;
-
     public User $owner;
     public Collection $guests;
+    public Collection $invites;
 
     public function updateShares()
     {
@@ -21,6 +24,7 @@ class SharingPanel extends Component
 
         $this->owner = $this->project->owner;
         $this->guests = $this->project->guests()->get();
+        $this->invites = $this->project->invites()->whereFuture('expires_at')->get();
     }
 
     public function mount()
@@ -33,26 +37,30 @@ class SharingPanel extends Component
         return view('livewire.projects.sharing-panel');
     }
 
+    #[Validate('email:rfc,dns')]
     public string $guestEmail = '';
     public function addGuest()
     {
         $this->authorize('manage-sharing', $this->project);
 
+        $this->validate();
+
         $guest = User::whereEmail($this->guestEmail)->first();
 
-        if (!$guest) {
-            $this->addError('guestEmail', 'No user found with that email address.');
-            return;
+        if ($guest) {
+            $this->project->guests()->attach($guest);
+            $this->project->save();
+
+            session()->flash('success', 'Guest added successfully.');
+        } else {
+            app()->make(ProjectInviteController::class)->sendInviteEmail($this->project, $this->guestEmail);
+
+            session()->flash('success', 'Guest invited successfully.');
         }
 
         $this->reset('guestEmail');
-
-        $this->project->guests()->attach($guest);
-        $this->project->save();
-
         $this->updateShares();
         Flux::modal('add-guest-modal')->close();
-
     }
 
     public function removeGuest(string $guest_id)
@@ -61,6 +69,15 @@ class SharingPanel extends Component
 
         $this->project->guests()->detach($guest_id);
         $this->project->save();
+
+        $this->updateShares();
+    }
+
+    public function removeInvite(string $invite_id)
+    {
+        $this->authorize('manage-sharing', $this->project);
+
+        ProjectInvite::find($invite_id)?->delete();
 
         $this->updateShares();
     }

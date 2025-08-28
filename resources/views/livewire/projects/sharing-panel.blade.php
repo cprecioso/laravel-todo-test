@@ -23,19 +23,10 @@
         </div>
     </div>
 
-    @if ($guests->isNotEmpty())
+    @if ($guests->isNotEmpty() || $invites->isNotEmpty())
         <div>
             <flux:subheading size="md" class="mb-2">Shared with</flux:subheading>
             <table class="min-w-full text-left">
-                <thead>
-                    <tr>
-                        <th class="px-4 py-2">Name</th>
-                        <th class="px-4 py-2">Email</th>
-                        @can('manage-sharing', $project)
-                            <th class="px-4 py-2">Actions</th>
-                        @endcan
-                    </tr>
-                </thead>
                 <tbody>
                     @foreach ($guests as $guest)
                         <tr>
@@ -43,11 +34,25 @@
                                 <flux:avatar src="{{ $guest->avatar_url ?? '' }}" alt="{{ $guest->name }}" size="xs" />
                                 <span>{{ $guest->name }}</span>
                             </td>
-                            <td class="px-4 py-2">{{ $guest->email }}</td>
                             @can('manage-sharing', $project)
                                 <td class="px-4 py-2">
                                     <flux:button type="button" variant="danger" icon="trash" title="Remove"
                                         wire:click="removeGuest({{ $guest->id }})" />
+                                </td>
+                            @endcan
+                        </tr>
+                    @endforeach
+
+
+                    @foreach ($invites as $invite)
+                        <tr>
+                            <td class="px-4 py-2 flex items-center space-x-2">
+                                <span>{{ $invite->email }}</span>
+                            </td>
+                            @can('manage-sharing', $project)
+                                <td class="px-4 py-2">
+                                    <flux:button type="button" variant="danger" icon="trash" title="Remove"
+                                        wire:click="removeInvite('{{ $invite->id }}')" />
                                 </td>
                             @endcan
                         </tr>
