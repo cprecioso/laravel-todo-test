@@ -6,13 +6,13 @@
             <flux:separator variant="subtle" />
         </div>
 
-        @can('delete', $project)
-            <button type="button" class="ml-4 px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                wire:click="deleteProject"
-                wire:confirm="{{ __('Are you sure you want to delete this project? This action cannot be undone.') }}">
-                {{ __('Delete project') }}
-            </button>
-        @endcan
+        <flux:button.group>
+            @can('delete', $project)
+                <flux:button type="button" wire:click="deleteProject" variant="danger" icon="trash"
+                    wire:confirm="{{ __('Are you sure you want to delete this project? This action cannot be undone.') }}"
+                    title="{{ __('Delete project') }}" />
+            @endcan
+        </flux:button.group>
     </div>
 
     @can('create', [\App\Models\Task::class, $project])
