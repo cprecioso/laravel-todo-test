@@ -19,7 +19,7 @@ class Task extends Model
         "is_completed" => false,
     ];
 
-    public function project(): BelongsTo
+    public function project()
     {
         return $this->belongsTo(Project::class);
     }

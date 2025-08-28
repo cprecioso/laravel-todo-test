@@ -52,18 +52,11 @@ class ProjectInviteController extends Controller
             abort(401, 'Invalid or expired invite link.');
         }
 
-        DB::transaction(function () use ($projectInvite) {
-            $allInvites = ProjectInvite::where('email', $projectInvite->email)->get();
-
-            foreach ($allInvites as $invite) {
-                DB::transaction(function () use ($invite) {
-                    Auth::user()->guestProjects()->attach($invite->project_id);
-                    $invite->delete();
-                });
-            }
-        });
-
-        Log::info($projectInvite);
+        ProjectInvite::where('email', '=', $projectInvite->email)
+            ->each(function ($invite) {
+                Auth::user()->guestProjects()->attach($invite->project_id);
+                $invite->delete();
+            });
 
         return redirect()->route('project', ['project' => $projectInvite->project()->first()->id]);
     }

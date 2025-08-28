@@ -8,7 +8,7 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('make-invite', function () {
-    $project = App\Models\Project::find(3);
+    $project = App\Models\Project::findSole(3);
     $email = 'my@test.invalid';
 
     $controller = app()->make(App\Http\Controllers\ProjectInviteController::class);

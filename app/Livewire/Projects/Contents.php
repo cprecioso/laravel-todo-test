@@ -3,6 +3,8 @@
 namespace App\Livewire\Projects;
 
 use App\Models\Project;
+use App\Models\Task;
+use Illuminate\Support\Collection;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -10,7 +12,8 @@ class Contents extends Component
 {
 
     public Project $project;
-    public $tasks;
+    /** @var Collection<int, Task> */
+    public Collection $tasks;
 
     #[On('task-list-update')]
     public function refreshTasks()

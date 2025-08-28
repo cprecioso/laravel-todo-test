@@ -15,7 +15,9 @@ class SharingPanel extends Component
 {
     public Project $project;
     public User $owner;
+    /** @var Collection<int, User> $guests */
     public Collection $guests;
+    /** @var Collection<int, ProjectInvite> $invites */
     public Collection $invites;
 
     public function updateShares()
@@ -77,7 +79,7 @@ class SharingPanel extends Component
     {
         $this->authorize('manage-sharing', $this->project);
 
-        ProjectInvite::find($invite_id)?->delete();
+        ProjectInvite::findSole($invite_id)->delete();
 
         $this->updateShares();
     }

@@ -18,23 +18,22 @@ class Project extends Model
 
     protected $fillable = ["name", "owner_id"];
 
-    public function owner(): BelongsTo
+    public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-
-    public function guests(): BelongsToMany
+    public function guests()
     {
         return $this->belongsToMany(User::class, table: 'task_project_shares');
     }
 
-    public function tasks(): HasMany
+    public function tasks()
     {
         return $this->hasMany(Task::class);
     }
 
-    public function invites(): HasMany
+    public function invites()
     {
         return $this->hasMany(ProjectInvite::class);
     }

@@ -41,7 +41,7 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    protected function casts()
     {
         return [
             'email_verified_at' => 'datetime',
@@ -52,7 +52,7 @@ class User extends Authenticatable
     /**
      * Get the user's initials
      */
-    public function initials(): string
+    public function initials()
     {
         return Str::of($this->name)
             ->explode(' ')
@@ -61,12 +61,12 @@ class User extends Authenticatable
             ->implode('');
     }
 
-    public function ownProjects(): HasMany
+    public function ownProjects()
     {
         return $this->hasMany(Project::class, 'owner_id');
     }
 
-    public function guestProjects(): BelongsToMany
+    public function guestProjects()
     {
         return $this->belongsToMany(Project::class, table: 'task_project_shares');
     }

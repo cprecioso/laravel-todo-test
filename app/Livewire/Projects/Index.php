@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Projects;
 
+use App\Models\Project;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -9,8 +11,10 @@ use Livewire\Component;
 class Index extends Component
 {
 
-    public $ownProjects;
-    public $guestProjects;
+    /** @var Collection<int, Project> */
+    public Collection $ownProjects;
+    /** @var Collection<int, Project> */
+    public Collection $guestProjects;
 
     #[On('project-list-update')]
     public function refreshProjects()
