@@ -7,15 +7,11 @@
         </div>
 
         <flux:button.group>
-            @can('manage-sharing', $project)
+            @canany(['view-sharing', 'manage-sharing'], $project)
                 <flux:modal.trigger name="sharing-panel">
-                    <flux:button type="button" variant="primary" icon="users" title="{{ __('Manage sharing') }}" />
+                    <flux:button type="button" variant="primary" icon="users" title="{{ __('Sharing') }}" />
                 </flux:modal.trigger>
-
-                <flux:modal name="sharing-panel" class="md:w-150">
-                    <livewire:projects.sharing-panel :project="$project" />
-                </flux:modal>
-            @endcan
+            @endcanany
 
 
             @can('delete', $project)
@@ -25,6 +21,11 @@
             @endcan
         </flux:button.group>
     </div>
+
+
+    <flux:modal name="sharing-panel" class="md:w-150">
+        <livewire:projects.sharing-panel :project="$project" />
+    </flux:modal>
 
     @can('create', [\App\Models\Task::class, $project])
         <div class="mb-4">

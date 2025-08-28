@@ -17,6 +17,8 @@ class SharingPanel extends Component
 
     public function updateShares()
     {
+        $this->authorize('view-sharing', $this->project);
+
         $this->owner = $this->project->owner;
         $this->guests = $this->project->guests()->get();
     }
