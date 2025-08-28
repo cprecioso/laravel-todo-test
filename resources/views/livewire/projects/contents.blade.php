@@ -7,6 +7,17 @@
         </div>
 
         <flux:button.group>
+            @can('manage-sharing', $project)
+                <flux:modal.trigger name="sharing-panel">
+                    <flux:button type="button" variant="primary" icon="users" title="{{ __('Manage sharing') }}" />
+                </flux:modal.trigger>
+
+                <flux:modal name="sharing-panel" class="md:w-150">
+                    <livewire:projects.sharing-panel :project="$project" />
+                </flux:modal>
+            @endcan
+
+
             @can('delete', $project)
                 <flux:button type="button" wire:click="deleteProject" variant="danger" icon="trash"
                     wire:confirm="{{ __('Are you sure you want to delete this project? This action cannot be undone.') }}"

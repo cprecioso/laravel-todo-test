@@ -73,4 +73,9 @@ class ProjectPolicy
     {
         return $this->isOwner($user, $project);
     }
+
+    public function manageSharing(User $user, Project $project): bool
+    {
+        return $this->isOwner($user, $project);
+    }
 }
