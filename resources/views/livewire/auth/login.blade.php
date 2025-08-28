@@ -37,8 +37,6 @@
 
         <flux:button type="button" class="w-full login-as-button" data-email="guest@example.com"
             data-password="password">Login as "Guest"</flux:button>
-
-        @vite(['resources/js/login-as.ts'])
     </div>
 
 
