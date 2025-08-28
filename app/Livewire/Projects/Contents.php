@@ -20,9 +20,8 @@ class Contents extends Component
         $this->tasks = $this->project->tasks()->get();
     }
 
-    public function mount(Project $project)
+    public function mount()
     {
-        $this->project = $project;
         $this->refreshTasks();
     }
 
