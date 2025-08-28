@@ -8,8 +8,6 @@ use App\Models\ProjectInvite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Log;
@@ -19,7 +17,7 @@ class ProjectInviteController extends Controller
     public function createInviteURL(
         Project $project,
         string $email,
-        Carbon|null $expires_at = null
+        ?Carbon $expires_at = null
     ) {
         $expires_at ??= now()->addDays();
 
@@ -40,7 +38,7 @@ class ProjectInviteController extends Controller
     public function sendInviteEmail(
         Project $project,
         string $email,
-        Carbon|null $expires_at = null
+        ?Carbon $expires_at = null
     ) {
         $url = $this->createInviteURL($project, $email, $expires_at);
         Mail::to($email)->queue(new InvitedToProject(Auth::user(), $project, $url));
@@ -48,7 +46,7 @@ class ProjectInviteController extends Controller
 
     public function accept(Request $request, ProjectInvite $projectInvite)
     {
-        if (!$request->hasValidSignature()) {
+        if (! $request->hasValidSignature()) {
             abort(401, 'Invalid or expired invite link.');
         }
 
@@ -72,6 +70,6 @@ class ProjectInviteController extends Controller
                 $deleteCount++;
             });
 
-        Log::info('Finished cleanupOldInvites task, deleted ' . $deleteCount . ' invites');
+        Log::info('Finished cleanupOldInvites task, deleted '.$deleteCount.' invites');
     }
 }

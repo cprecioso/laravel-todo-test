@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Projects;
 
-use Livewire\Component;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class NewInput extends Component
 {

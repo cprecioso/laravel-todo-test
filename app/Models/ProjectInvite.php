@@ -15,7 +15,7 @@ class ProjectInvite extends Model
 {
     use HasUlids;
 
-    protected $table = "task_project_invites";
+    protected $table = 'task_project_invites';
 
     protected $fillable = ['email', 'expires_at', 'project_id'];
 

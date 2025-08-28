@@ -10,8 +10,8 @@ use Livewire\Component;
 
 class Contents extends Component
 {
-
     public Project $project;
+
     /** @var Collection<int, Task> */
     public Collection $tasks;
 
@@ -30,7 +30,7 @@ class Contents extends Component
 
     public function render()
     {
-        return view("livewire.projects.contents");
+        return view('livewire.projects.contents');
     }
 
     public function deleteProject()

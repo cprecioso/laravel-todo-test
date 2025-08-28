@@ -11,7 +11,7 @@ class Item extends Component
 
     public function render()
     {
-        return view("livewire.tasks.item");
+        return view('livewire.tasks.item');
     }
 
     public function handleCheck()

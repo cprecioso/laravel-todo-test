@@ -6,8 +6,8 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,13 +41,12 @@ class DatabaseSeeder extends Seeder
 
             for ($j = 0; $j < 10; $j++) {
                 Task::create([
-                    'text' => 'Task ' . ($i * 10 + $j),
+                    'text' => 'Task '.($i * 10 + $j),
                     'project_id' => $project->id,
                     'is_completed' => rand(0, 1) == 1,
                 ]);
             }
         }
-
 
     }
 }

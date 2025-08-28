@@ -17,7 +17,6 @@ class ProjectPolicy
         return $this->isOwner($user, $project) || $project->guests->contains($user);
     }
 
-
     /**
      * Determine whether the user can view any models.
      */

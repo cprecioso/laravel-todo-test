@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -13,10 +12,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Task extends Model
 {
-    protected $fillable = ["text", "is_completed", "project_id"];
+    protected $fillable = ['text', 'is_completed', 'project_id'];
 
     protected $attributes = [
-        "is_completed" => false,
+        'is_completed' => false,
     ];
 
     public function project()

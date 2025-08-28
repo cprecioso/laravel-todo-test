@@ -14,10 +14,13 @@ use Livewire\Component;
 class SharingPanel extends Component
 {
     public Project $project;
+
     public User $owner;
-    /** @var Collection<int, User> $guests */
+
+    /** @var Collection<int, User> */
     public Collection $guests;
-    /** @var Collection<int, ProjectInvite> $invites */
+
+    /** @var Collection<int, ProjectInvite> */
     public Collection $invites;
 
     public function updateShares()
@@ -41,6 +44,7 @@ class SharingPanel extends Component
 
     #[Validate('email:rfc,dns')]
     public string $guestEmail = '';
+
     public function addGuest()
     {
         $this->authorize('manage-sharing', $this->project);

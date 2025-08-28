@@ -16,7 +16,9 @@ class InvitedToProject extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     public string $inviterName;
+
     public string $projectName;
+
     public string $url;
 
     /**

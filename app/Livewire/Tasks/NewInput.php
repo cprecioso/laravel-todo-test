@@ -3,13 +3,14 @@
 namespace App\Livewire\Tasks;
 
 use App\Models\Project;
-use Livewire\Component;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class NewInput extends Component
 {
     public Project $project;
+
     public string $text = '';
 
     public function addTask()
