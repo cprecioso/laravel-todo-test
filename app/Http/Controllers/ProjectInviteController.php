@@ -60,4 +60,18 @@ class ProjectInviteController extends Controller
 
         return redirect()->route('project', ['project' => $projectInvite->project()->first()->id]);
     }
+
+    public static function cleanupOldInvites()
+    {
+        Log::info('Running cleanupOldInvites task');
+
+        $deleteCount = 0;
+        ProjectInvite::where('expires_at', '<', now())
+            ->each(function ($invite) use (&$deleteCount) {
+                $invite->delete();
+                $deleteCount++;
+            });
+
+        Log::info('Finished cleanupOldInvites task, deleted ' . $deleteCount . ' invites');
+    }
 }
