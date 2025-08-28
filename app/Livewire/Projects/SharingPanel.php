@@ -42,7 +42,7 @@ class SharingPanel extends Component
         return view('livewire.projects.sharing-panel');
     }
 
-    #[Validate('email:rfc,dns')]
+    #[Validate('email:rfc')]
     public string $guestEmail = '';
 
     public function addGuest()
