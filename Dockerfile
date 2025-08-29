@@ -1,8 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM alpine AS cloner
-
-RUN apk add --no-cache git
+FROM alpine/git AS cloner
 
 RUN --mount=type=bind,target=/src <<EOF
     git clone --depth 1 /src /app
