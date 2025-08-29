@@ -65,4 +65,4 @@ ENV OCTANE_HTTPS=${OCTANE_HTTPS}
 ENV VIEW_COMPILED_PATH=/app/app_cache/views
 RUN php artisan optimize
 
-ENTRYPOINT ["php", "artisan", "octane:frankenphp"]
+CMD ["php", "artisan", "octane:frankenphp"]
