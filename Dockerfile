@@ -27,14 +27,6 @@ FROM dunglas/frankenphp
 
 WORKDIR /app
 COPY --from=builder-node /app .
-
-COPY .env.example .env
-
-ENV APP_ENV=local
-ENV APP_DEBUG=true
-ENV APP_URL=https://localhost
-ENV APP_KEY=base64:Mkg8106wR2x3HTJeyaxLH1YzwP90iYqQbu9qI3gj8kA=
-
 RUN php artisan optimize
 RUN php artisan migrate --force --seed
 
