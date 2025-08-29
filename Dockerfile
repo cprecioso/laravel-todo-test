@@ -2,7 +2,8 @@
 
 FROM alpine/git AS cloner
 
-RUN --mount=type=bind,target=/src <<EOF
+COPY --link . /src
+RUN <<EOF
     git clone --depth 1 /src /app
     rm -rf /app/.git
 EOF
