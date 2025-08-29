@@ -28,23 +28,13 @@ ENV NODE_ENV=production
 RUN npm ci
 RUN npm run build
 
-FROM dunglas/frankenphp AS base
+FROM dunglas/frankenphp
 
 # Enable PHP production settings
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 WORKDIR /app
 COPY --from=builder-node /app .
-
-FROM base AS artisan
-
-ENTRYPOINT [ "php", "artisan" ]
-
-FROM artisan AS migrator
-
-CMD ["migrate", "--force", "--seed"]
-
-FROM base AS app
 
 HEALTHCHECK --interval=5s --timeout=3s \
   CMD curl -f http://localhost/up || exit 1
