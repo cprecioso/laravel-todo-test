@@ -46,5 +46,3 @@ HEALTHCHECK --interval=5s --timeout=3s \
 
 ENV VIEW_COMPILED_PATH=/app/app_cache/views
 RUN php artisan optimize
-
-VOLUME "/app/storage"
