@@ -44,5 +44,6 @@ FROM base AS app
 HEALTHCHECK --interval=5s --timeout=3s \
   CMD curl -f http://localhost/up || exit 1
 
-VOLUME "/app/bootstrap/cache"
+RUN php artisan optimize
+
 VOLUME "/app/storage"
