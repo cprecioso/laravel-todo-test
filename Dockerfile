@@ -2,10 +2,14 @@
 
 FROM alpine/git AS cloner
 
-COPY --link . /src
+COPY --link . /app
+
+WORKDIR /app
 RUN <<EOF
-    git clone --depth 1 /src /app
-    rm -rf /app/.git
+    if [ -d .git ]; then
+        git clean -fdx
+        rm -rf .git
+    fi
 EOF
 
 FROM composer AS builder-php
