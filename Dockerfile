@@ -4,7 +4,7 @@ FROM alpine AS cloner
 
 RUN apk add --no-cache git
 
-RUN --mount=type=bind,target=src <<EOF
+RUN --mount=type=bind,target=/src <<EOF
     git clone --depth 1 /src /app
     rm -rf /app/.git
 EOF
