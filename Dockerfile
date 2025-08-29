@@ -30,7 +30,7 @@ RUN npm run build
 
 FROM dunglas/frankenphp
 
-RUN install-php-extensions pdo_mysql
+RUN install-php-extensions pdo_mysql pcntl
 
 # Enable PHP production settings
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -59,6 +59,10 @@ ARG LOG_CHANNEL
 ENV LOG_CHANNEL=${LOG_CHANNEL}
 ARG QUEUE_CONNECTION
 ENV QUEUE_CONNECTION=${QUEUE_CONNECTION}
+ARG OCTANE_HTTPS
+ENV OCTANE_HTTPS=${OCTANE_HTTPS}
 
 ENV VIEW_COMPILED_PATH=/app/app_cache/views
 RUN php artisan optimize
+
+ENTRYPOINT ["php", "artisan", "octane:frankenphp"]
