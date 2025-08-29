@@ -4,4 +4,4 @@
 builder = "DOCKERFILE"
 
 [deploy]
-preDeployCommand = "php artisan migrate --force"
+preDeployCommand = "php artisan migrate --force --isolated"
