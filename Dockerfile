@@ -25,6 +25,9 @@ RUN npm run build
 
 FROM dunglas/frankenphp
 
+# Enable PHP production settings
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
 WORKDIR /app
 COPY --from=builder-node /app .
 RUN php artisan optimize
