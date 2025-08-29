@@ -44,6 +44,7 @@ FROM base AS app
 HEALTHCHECK --interval=5s --timeout=3s \
   CMD curl -f http://localhost/up || exit 1
 
+ENV VIEW_COMPILED_PATH=/app/app_cache/views
 RUN php artisan optimize
 
 VOLUME "/app/storage"
