@@ -30,7 +30,7 @@ RUN npm run build
 
 FROM dunglas/frankenphp
 
-RUN install-php-extensions pdo_mysql pcntl
+RUN install-php-extensions pdo_mysql pcntl redis
 
 # Enable PHP production settings
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -61,6 +61,10 @@ ARG QUEUE_CONNECTION
 ENV QUEUE_CONNECTION=${QUEUE_CONNECTION}
 ARG OCTANE_HTTPS
 ENV OCTANE_HTTPS=${OCTANE_HTTPS}
+ARG REDIS_URL
+ENV REDIS_URL=${REDIS_URL}
+ARG CACHE_STORE
+ENV CACHE_STORE=${CACHE_STORE}
 
 ENV VIEW_COMPILED_PATH=/app/app_cache/views
 RUN php artisan optimize
