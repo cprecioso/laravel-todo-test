@@ -7,10 +7,10 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('components.layouts.auth')]
+#[Layout("components.layouts.auth")]
 class ConfirmPassword extends Component
 {
-    public string $password = '';
+    public string $password = "";
 
     /**
      * Confirm the current user's password.
@@ -18,20 +18,25 @@ class ConfirmPassword extends Component
     public function confirmPassword(): void
     {
         $this->validate([
-            'password' => ['required', 'string'],
+            "password" => ["required", "string"],
         ]);
 
-        if (! Auth::guard('web')->validate([
-            'email' => Auth::user()->email,
-            'password' => $this->password,
-        ])) {
+        if (
+            !Auth::guard("web")->validate([
+                "email" => Auth::user()->email,
+                "password" => $this->password,
+            ])
+        ) {
             throw ValidationException::withMessages([
-                'password' => __('auth.password'),
+                "password" => __("auth.password"),
             ]);
         }
 
-        session(['auth.password_confirmed_at' => time()]);
+        session(["auth.password_confirmed_at" => time()]);
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        $this->redirectIntended(
+            default: route("dashboard", absolute: false),
+            navigate: true,
+        );
     }
 }

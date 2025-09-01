@@ -14,7 +14,8 @@ class ProjectPolicy
 
     protected function hasAccess(User $user, Project $project): bool
     {
-        return $this->isOwner($user, $project) || $project->guests->contains($user);
+        return $this->isOwner($user, $project) ||
+            $project->guests->contains($user);
     }
 
     /**

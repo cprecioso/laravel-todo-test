@@ -12,10 +12,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Task extends Model
 {
-    protected $fillable = ['text', 'is_completed', 'project_id'];
+    protected $fillable = ["text", "is_completed", "project_id"];
 
     protected $attributes = [
-        'is_completed' => false,
+        "is_completed" => false,
     ];
 
     public function project()

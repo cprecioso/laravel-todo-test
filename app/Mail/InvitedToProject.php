@@ -47,11 +47,11 @@ class InvitedToProject extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.project.invite',
+            markdown: "mail.project.invite",
             with: [
-                'inviterName' => $this->inviterName,
-                'projectName' => $this->projectName,
-                'url' => $this->url,
+                "inviterName" => $this->inviterName,
+                "projectName" => $this->projectName,
+                "url" => $this->url,
             ],
         );
     }

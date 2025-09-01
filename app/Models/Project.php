@@ -11,18 +11,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Project extends Model
 {
-    protected $table = 'task_projects';
+    protected $table = "task_projects";
 
-    protected $fillable = ['name', 'owner_id'];
+    protected $fillable = ["name", "owner_id"];
 
     public function owner()
     {
-        return $this->belongsTo(User::class, 'owner_id');
+        return $this->belongsTo(User::class, "owner_id");
     }
 
     public function guests()
     {
-        return $this->belongsToMany(User::class, table: 'task_project_shares');
+        return $this->belongsToMany(User::class, table: "task_project_shares");
     }
 
     public function tasks()

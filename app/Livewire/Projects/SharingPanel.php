@@ -18,21 +18,24 @@ class SharingPanel extends Component
 
     public User $owner;
 
-    #[Locked]
     /** @var Collection<int, User> */
+    #[Locked]
     public Collection $guests;
 
-    #[Locked]
     /** @var Collection<int, ProjectInvite> */
+    #[Locked]
     public Collection $invites;
 
     public function updateShares()
     {
-        $this->authorize('view-sharing', $this->project);
+        $this->authorize("view-sharing", $this->project);
 
         $this->owner = $this->project->owner;
         $this->guests = $this->project->guests()->get();
-        $this->invites = $this->project->invites()->whereFuture('expires_at')->get();
+        $this->invites = $this->project
+            ->invites()
+            ->whereFuture("expires_at")
+            ->get();
     }
 
     public function mount()
@@ -42,15 +45,15 @@ class SharingPanel extends Component
 
     public function render()
     {
-        return view('livewire.projects.sharing-panel');
+        return view("livewire.projects.sharing-panel");
     }
 
-    #[Validate('email:rfc')]
-    public string $guestEmail = '';
+    #[Validate("email:rfc")]
+    public string $guestEmail = "";
 
     public function addGuest()
     {
-        $this->authorize('manage-sharing', $this->project);
+        $this->authorize("manage-sharing", $this->project);
 
         $this->validate();
 
@@ -60,21 +63,23 @@ class SharingPanel extends Component
             $this->project->guests()->attach($guest);
             $this->project->save();
 
-            session()->flash('success', 'Guest added successfully.');
+            session()->flash("success", "Guest added successfully.");
         } else {
-            app()->make(ProjectInviteController::class)->sendInviteEmail($this->project, $this->guestEmail);
+            app()
+                ->make(ProjectInviteController::class)
+                ->sendInviteEmail($this->project, $this->guestEmail);
 
-            session()->flash('success', 'Guest invited successfully.');
+            session()->flash("success", "Guest invited successfully.");
         }
 
-        $this->reset('guestEmail');
+        $this->reset("guestEmail");
         $this->updateShares();
-        Flux::modal('add-guest-modal')->close();
+        Flux::modal("add-guest-modal")->close();
     }
 
     public function removeGuest(string $guest_id)
     {
-        $this->authorize('manage-sharing', $this->project);
+        $this->authorize("manage-sharing", $this->project);
 
         $this->project->guests()->detach($guest_id);
         $this->project->save();
@@ -84,7 +89,7 @@ class SharingPanel extends Component
 
     public function removeInvite(string $invite_id)
     {
-        $this->authorize('manage-sharing', $this->project);
+        $this->authorize("manage-sharing", $this->project);
 
         ProjectInvite::findSole($invite_id)->delete();
 

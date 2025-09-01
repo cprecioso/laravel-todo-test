@@ -11,6 +11,6 @@ class IndexItem extends Component
 
     public function render()
     {
-        return view('livewire.projects.index-item');
+        return view("livewire.projects.index-item");
     }
 }

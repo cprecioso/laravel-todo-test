@@ -10,11 +10,11 @@ use Livewire\Component;
 
 class Password extends Component
 {
-    public string $current_password = '';
+    public string $current_password = "";
 
-    public string $password = '';
+    public string $password = "";
 
-    public string $password_confirmation = '';
+    public string $password_confirmation = "";
 
     /**
      * Update the password for the currently authenticated user.
@@ -23,21 +23,34 @@ class Password extends Component
     {
         try {
             $validated = $this->validate([
-                'current_password' => ['required', 'string', 'current_password'],
-                'password' => ['required', 'string', PasswordRule::defaults(), 'confirmed'],
+                "current_password" => [
+                    "required",
+                    "string",
+                    "current_password",
+                ],
+                "password" => [
+                    "required",
+                    "string",
+                    PasswordRule::defaults(),
+                    "confirmed",
+                ],
             ]);
         } catch (ValidationException $e) {
-            $this->reset('current_password', 'password', 'password_confirmation');
+            $this->reset(
+                "current_password",
+                "password",
+                "password_confirmation",
+            );
 
             throw $e;
         }
 
         Auth::user()->update([
-            'password' => Hash::make($validated['password']),
+            "password" => Hash::make($validated["password"]),
         ]);
 
-        $this->reset('current_password', 'password', 'password_confirmation');
+        $this->reset("current_password", "password", "password_confirmation");
 
-        $this->dispatch('password-updated');
+        $this->dispatch("password-updated");
     }
 }

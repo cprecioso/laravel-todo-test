@@ -11,15 +11,15 @@ use Livewire\Component;
 
 class Index extends Component
 {
-    #[Locked]
     /** @var Collection<int, Project> */
+    #[Locked]
     public Collection $ownProjects;
 
-    #[Locked]
     /** @var Collection<int, Project> */
+    #[Locked]
     public Collection $guestProjects;
 
-    #[On('project-list-update')]
+    #[On("project-list-update")]
     public function refreshProjects()
     {
         $this->ownProjects = Auth::user()->ownProjects()->get();
@@ -33,6 +33,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.projects.index');
+        return view("livewire.projects.index");
     }
 }

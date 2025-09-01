@@ -11,12 +11,12 @@ class Item extends Component
 
     public function render()
     {
-        return view('livewire.tasks.item');
+        return view("livewire.tasks.item");
     }
 
     public function handleCheck()
     {
-        $this->authorize('update', $this->task);
+        $this->authorize("update", $this->task);
 
         $this->task->is_completed = true;
         $this->task->save();
@@ -24,7 +24,7 @@ class Item extends Component
 
     public function handleUncheck()
     {
-        $this->authorize('update', $this->task);
+        $this->authorize("update", $this->task);
 
         $this->task->is_completed = false;
         $this->task->save();
@@ -32,9 +32,9 @@ class Item extends Component
 
     public function handleDelete()
     {
-        $this->authorize('delete', $this->task);
+        $this->authorize("delete", $this->task);
 
         $this->task->delete();
-        $this->dispatch('task-list-update');
+        $this->dispatch("task-list-update");
     }
 }

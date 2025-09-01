@@ -17,21 +17,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $mainUser = User::create([
-            'name' => 'Carlos Precioso',
-            'email' => 'me@example.com',
-            'password' => Hash::make('password'),
+            "name" => "Carlos Precioso",
+            "email" => "me@example.com",
+            "password" => Hash::make("password"),
         ]);
 
         $otherUser = User::create([
-            'name' => 'Guest Guéstez',
-            'email' => 'guest@example.com',
-            'password' => Hash::make('password'),
+            "name" => "Guest Guéstez",
+            "email" => "guest@example.com",
+            "password" => Hash::make("password"),
         ]);
 
         for ($i = 0; $i < 10; $i++) {
             $project = Project::create([
-                'name' => "Project $i",
-                'owner_id' => $mainUser->id,
+                "name" => "Project $i",
+                "owner_id" => $mainUser->id,
             ]);
 
             if ($i % 2 == 0) {
@@ -41,12 +41,11 @@ class DatabaseSeeder extends Seeder
 
             for ($j = 0; $j < 10; $j++) {
                 Task::create([
-                    'text' => 'Task '.($i * 10 + $j),
-                    'project_id' => $project->id,
-                    'is_completed' => rand(0, 1) == 1,
+                    "text" => "Task " . ($i * 10 + $j),
+                    "project_id" => $project->id,
+                    "is_completed" => rand(0, 1) == 1,
                 ]);
             }
         }
-
     }
 }

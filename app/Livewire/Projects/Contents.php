@@ -13,14 +13,14 @@ class Contents extends Component
 {
     public Project $project;
 
-    #[Locked]
     /** @var Collection<int, Task> */
+    #[Locked]
     public Collection $tasks;
 
-    #[On('task-list-update')]
+    #[On("task-list-update")]
     public function refreshTasks()
     {
-        $this->authorize('view', $this->project);
+        $this->authorize("view", $this->project);
 
         $this->tasks = $this->project->tasks()->get();
     }
@@ -32,16 +32,16 @@ class Contents extends Component
 
     public function render()
     {
-        return view('livewire.projects.contents');
+        return view("livewire.projects.contents");
     }
 
     public function deleteProject()
     {
-        $this->authorize('delete', $this->project);
+        $this->authorize("delete", $this->project);
 
         $this->project->delete();
-        session()->flash('message', 'Project deleted successfully!');
-        $this->dispatch('project-list-update');
-        $this->redirectRoute('dashboard');
+        session()->flash("message", "Project deleted successfully!");
+        $this->dispatch("project-list-update");
+        $this->redirectRoute("dashboard");
     }
 }

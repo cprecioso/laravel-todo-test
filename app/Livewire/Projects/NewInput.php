@@ -9,29 +9,29 @@ use Livewire\Component;
 
 class NewInput extends Component
 {
-    #[Validate('required|string|max:255')]
-    public string $name = '';
+    #[Validate("required|string|max:255")]
+    public string $name = "";
 
     public function addProject()
     {
-        $this->authorize('create', Project::class);
+        $this->authorize("create", Project::class);
 
         $this->validate();
 
         $newProject = Project::create([
-            'name' => $this->name,
-            'owner_id' => Auth::id(),
+            "name" => $this->name,
+            "owner_id" => Auth::id(),
         ]);
 
-        $this->reset('name');
-        session()->flash('message', 'Project added successfully!');
-        $this->dispatch('project-list-update');
+        $this->reset("name");
+        session()->flash("message", "Project added successfully!");
+        $this->dispatch("project-list-update");
 
-        $this->redirectRoute('project', ['project' => $newProject->id]);
+        $this->redirectRoute("project", ["project" => $newProject->id]);
     }
 
     public function render()
     {
-        return view('livewire.projects.new-input');
+        return view("livewire.projects.new-input");
     }
 }

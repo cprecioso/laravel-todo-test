@@ -5,7 +5,7 @@ FROM alpine/git AS cloner
 COPY --link . /app
 
 WORKDIR /app
-RUN <<EOF
+RUN << EOF
     if [ -d .git ]; then
         git clean -fdx
         rm -rf .git
@@ -39,7 +39,7 @@ WORKDIR /app
 COPY --from=builder-node /app .
 
 HEALTHCHECK --interval=5s --timeout=3s \
-  CMD curl -f http://localhost/up || exit 1
+    CMD curl -f http://localhost/up || exit 1
 
 ARG APP_NAME
 ENV APP_NAME=${APP_NAME}

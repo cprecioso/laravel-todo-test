@@ -18,21 +18,14 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable = ["name", "email", "password"];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ["password", "remember_token"];
 
     /**
      * Get the attributes that should be cast.
@@ -42,8 +35,8 @@ class User extends Authenticatable
     protected function casts()
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            "email_verified_at" => "datetime",
+            "password" => "hashed",
         ];
     }
 
@@ -53,19 +46,22 @@ class User extends Authenticatable
     public function initials()
     {
         return Str::of($this->name)
-            ->explode(' ')
+            ->explode(" ")
             ->take(2)
-            ->map(fn ($word) => Str::substr($word, 0, 1))
-            ->implode('');
+            ->map(fn($word) => Str::substr($word, 0, 1))
+            ->implode("");
     }
 
     public function ownProjects()
     {
-        return $this->hasMany(Project::class, 'owner_id');
+        return $this->hasMany(Project::class, "owner_id");
     }
 
     public function guestProjects()
     {
-        return $this->belongsToMany(Project::class, table: 'task_project_shares');
+        return $this->belongsToMany(
+            Project::class,
+            table: "task_project_shares",
+        );
     }
 }
