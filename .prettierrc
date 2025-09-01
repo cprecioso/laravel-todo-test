@@ -3,5 +3,14 @@
         "@prettier/plugin-php",
         "prettier-plugin-pkg",
         "prettier-plugin-sh"
+    ],
+    "overrides": [
+        {
+            "files": ["slides/**/*.md"],
+            "options": {
+                "parser": "slidev",
+                "plugins": ["prettier-plugin-slidev"]
+            }
+        }
     ]
 }

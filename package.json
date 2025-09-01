@@ -3,7 +3,10 @@
     "private": true,
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "slides:build": "slidev build slides/index.md",
+        "slides:dev": "slidev --open slides/index.md",
+        "slides:export": "slidev export slides/index.md"
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.1.11",
@@ -22,8 +25,12 @@
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.24.0",
+        "@slidev/cli": "^52.1.0",
         "prettier": "^3.6.2",
         "prettier-plugin-pkg": "^0.21.2",
-        "prettier-plugin-sh": "^0.18.0"
+        "prettier-plugin-sh": "^0.18.0",
+        "prettier-plugin-slidev": "^1.0.5",
+        "slidev-theme-dracula": "^0.2.0",
+        "vue": "^3.5.20"
     }
 }
