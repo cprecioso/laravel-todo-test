@@ -13,23 +13,29 @@ document.body.addEventListener("click", async ({ target }) => {
     const password = target.dataset.password;
     if (!email || !password) throw new Error("Email and password are required");
 
-    const emailInput = document.querySelector('input[autocomplete="email"]');
-    const passwordInput = document.querySelector(
+    const emailInput = getEl('input[autocomplete="email"]', HTMLInputElement);
+    const passwordInput = getEl(
         'input[autocomplete="current-password"]',
+        HTMLInputElement,
     );
-    if (
-        !emailInput ||
-        !passwordInput ||
-        !(emailInput instanceof HTMLInputElement) ||
-        !(passwordInput instanceof HTMLInputElement)
-    )
-        throw new Error("Email and password inputs not found");
+    const submitButton = getEl('button[type="submit"]', HTMLButtonElement);
 
+    await user.clear(emailInput);
     await user.type(emailInput, email);
+
+    await user.clear(passwordInput);
     await user.type(passwordInput, password);
 
-    const submitButton = document.querySelector('button[type="submit"]');
-    if (!submitButton || !(submitButton instanceof HTMLButtonElement))
-        throw new Error("Submit button not found");
     await user.click(submitButton);
 });
+
+function getEl<T extends HTMLElement>(
+    selector: string,
+    class_: { new (...args: unknown[]): T },
+): T {
+    const el = document.querySelector(selector);
+    if (!el) throw new Error(`"${selector}" not found`);
+    if (!(el instanceof class_))
+        throw new Error(`"${selector}" not a ${class_.name}`);
+    return el;
+}
