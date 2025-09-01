@@ -1,5 +1,4 @@
-// @ts-expect-error
-import userEvent from "https://esm.sh/@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 
 const user = userEvent.setup();
 
