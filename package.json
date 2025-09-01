@@ -1,6 +1,6 @@
 {
-    "private": true,
     "type": "module",
+    "private": true,
     "scripts": {
         "build": "vite build",
         "dev": "vite"
@@ -19,5 +19,11 @@
         "@rollup/rollup-linux-x64-gnu": "4.9.5",
         "@tailwindcss/oxide-linux-x64-gnu": "^4.0.1",
         "lightningcss-linux-x64-gnu": "^1.29.1"
+    },
+    "devDependencies": {
+        "@prettier/plugin-php": "^0.24.0",
+        "prettier": "^3.6.2",
+        "prettier-plugin-pkg": "^0.21.2",
+        "prettier-plugin-sh": "^0.18.0"
     }
 }
