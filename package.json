@@ -24,6 +24,7 @@
         "lightningcss-linux-x64-gnu": "^1.29.1"
     },
     "devDependencies": {
+        "@iconify-json/vscode-icons": "^1.2.30",
         "@prettier/plugin-php": "^0.24.0",
         "@slidev/cli": "^52.1.0",
         "prettier": "^3.6.2",

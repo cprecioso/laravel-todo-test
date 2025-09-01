@@ -9,6 +9,7 @@ use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
+// #region component
 class Contents extends Component
 {
     public Project $project;
@@ -45,3 +46,5 @@ class Contents extends Component
         $this->redirectRoute("dashboard");
     }
 }
+// #endregion component
+
